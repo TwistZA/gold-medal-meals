@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "./Layout.module.css";
 import React from "react";
 
-const Layout = ({ children, title = "Meals A La Carte" }) => {
+const Layout = ({ children, title = "🍽 Gold Medal Meals 🍽" }) => {
   return (
     <div className={styles.container}>
       <Head>
@@ -13,10 +13,11 @@ const Layout = ({ children, title = "Meals A La Carte" }) => {
 
       <header className={styles.header}>
         <Link href="/">
-          <img src="logo2.png" alt="logo"></img>
+          <img src="logo5.png" alt="logo"></img>
         </Link>
       </header>
-
+      <br></br>
+      <br></br>
       <main className={styles.main}>{children}</main>
 
       <footer className={styles.footer}>Powered by React</footer>

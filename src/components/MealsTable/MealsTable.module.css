@@ -11,22 +11,22 @@
 
 .meals_container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-    grid-gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-gap: 5rem;
 }
 
 .card{
-    border: 1px solid #E2E2E2;
-    border-radius: .5rem;
+    border: 3px none goldenrod;
+    border-radius:54% 46% 56% 44% / 5% 100% 5% 100%; 
     display:flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: whitesmoke;
+    background-color: black;
 
-    -webkit-box-shadow: 7px 7px 5px 0px rgba(204, 170, 0, 0.3);
-    -moz-box-shadow:    7px 7px 5px 0px rgba(204, 170, 0, 0.3);
-    box-shadow:         7px 7px 5px 0px rgba(204, 170, 0, 0.3);
+   
+    -webkit-box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 1px 6px 27px 19px rgba(241,239,32,0.36); 
+    box-shadow: 5px 5px 5px 0px #000000, inset 4px 4px 15px 0px #000000, 1px 6px 27px 19px rgba(241,239,32,0.36);
 
 }
 
@@ -38,13 +38,15 @@
 }
 
 .recipe_button {
-    background: rgb(233,209,214);
+    background: black;
     background: radial-gradient(circle, rgba(233,209,214,1) 0%, rgba(230,227,135,1) 52%, rgba(201,149,24,1) 100%); 
     width: 100%;
     padding:1em;
     justify-content: center;
     align-items: center;
     display:flex;
+
+    border-radius:54% 46% 56% 44% / 0% 100% 0% 100%; 
 }
 
 
