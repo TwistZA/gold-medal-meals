@@ -3,6 +3,16 @@ import Link from "next/link";
 import styles from "./Layout.module.css";
 import React from "react";
 
+const ColoredLine = ({ color }) => (
+  <hr
+    style={{
+      color: color,
+      backgroundColor: color,
+      height: 1,
+    }}
+  />
+);
+
 const Layout = ({ children, title = "🍽 Gold Medal Meals 🍽" }) => {
   return (
     <div className={styles.container}>
@@ -13,14 +23,16 @@ const Layout = ({ children, title = "🍽 Gold Medal Meals 🍽" }) => {
 
       <header className={styles.header}>
         <Link href="/">
-          <img src="logo5.png" alt="logo"></img>
+          <img src="/logo5.png" alt="logo"></img>
         </Link>
       </header>
+      <ColoredLine color="yellow" />
       <br></br>
       <br></br>
       <main className={styles.main}>{children}</main>
-
-      <footer className={styles.footer}>Powered by React</footer>
+      <br></br>
+      <ColoredLine color="yellow" />
+      <footer className={styles.footer}>Powered by React, Next JS</footer>
     </div>
   );
 };

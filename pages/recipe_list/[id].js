@@ -13,19 +13,21 @@ const getRecipeList = async (id) => {
 
 export default function RecipeList({ recipe_list }) {
   return (
-    <div className={styles.meals_container}>
-      {recipe_list.map((recipe) => (
-        <div className={styles.card} key={recipe.idMeal}>
-          <img src={recipe.strMealThumb} alt={recipe.strMeal}></img>
-          <div className={styles.recipe_button}>
-            <a href="#">
-              <h3>{recipe.strMeal}</h3>
-              <button className={styles.recipe_button_inner}>Recipe</button>
-            </a>
+    <Layout>
+      <div className={styles.meals_container}>
+        {recipe_list.map((recipe) => (
+          <div className={styles.card} key={recipe.idMeal}>
+            <img src={recipe.strMealThumb} alt={recipe.strMeal}></img>
+            <div className={styles.recipe_button}>
+              <a href="#">
+                <h3>{recipe.strMeal}</h3>
+                <button className={styles.recipe_button_inner}>Recipe</button>
+              </a>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </Layout>
   );
 }
 
@@ -35,7 +37,6 @@ export const getStaticPaths = async () => {
   );
   const categories = await res.json();
 
-  console.log("--------getStaticPaths-------");
   const paths = categories.categories.map((category) => ({
     params: { id: category.strCategory },
   }));
@@ -47,7 +48,6 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const recipe_list = await getRecipeList(params.id);
-  console.log("--------getStaticProps-------");
   return {
     props: {
       recipe_list,
