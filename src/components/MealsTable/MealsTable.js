@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./MealsTable.module.css";
 import Link from "next/link";
 
@@ -16,7 +15,7 @@ const MealsTable = ({ categories }) => {
               alt={category.strCategory}
             ></img>
             <div className={styles.recipe_button}>
-              <a href="#">
+              <a href={category.strCategory}>
                 <h3>{category.strCategory} Recipes</h3>
               </a>
             </div>

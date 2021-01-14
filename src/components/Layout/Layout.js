@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
 import styles from "./Layout.module.css";
-import React from "react";
 
 const ColoredLine = ({ color }) => (
   <hr

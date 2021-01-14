@@ -1,7 +1,8 @@
 import Layout from "../../src/components/Layout/Layout";
 import styles from "./RecipeList.module.css";
+import Link from "next/link";
 
-const getRecipeList = async (id) => {
+export const getRecipeList = async (id) => {
   const res = await fetch(
     `https://www.themealdb.com/api/json/v1/1/filter.php?c=${id}`
   );
@@ -12,19 +13,23 @@ const getRecipeList = async (id) => {
 };
 
 export default function RecipeList({ recipe_list }) {
+  const recipePathPrefix = "/recipes/";
+
   return (
     <Layout>
-      <div className={styles.meals_container}>
+      <div className={styles.recipe_list_container}>
         {recipe_list.map((recipe) => (
-          <div className={styles.card} key={recipe.idMeal}>
-            <img src={recipe.strMealThumb} alt={recipe.strMeal}></img>
-            <div className={styles.recipe_button}>
-              <a href="#">
-                <h3>{recipe.strMeal}</h3>
-                <button className={styles.recipe_button_inner}>Recipe</button>
-              </a>
+          <Link href={`/recipes/${recipe.idMeal}`} key={recipe.idMeal}>
+            <div className={styles.card} key={recipe.idMeal}>
+              <img src={recipe.strMealThumb} alt={recipe.strMeal}></img>
+              <div className={styles.recipe_button}>
+                <a href={`${recipePathPrefix}${recipe.strMeal}`}>
+                  <h3>{recipe.strMeal}</h3>
+                  <button className={styles.recipe_button_inner}>Recipe</button>
+                </a>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </Layout>
