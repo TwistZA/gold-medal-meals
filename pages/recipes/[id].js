@@ -57,7 +57,7 @@ const getCountry = (demonym) => {
 
 export default function Recipe({ recipe }) {
   //get country by demonym, sonce mealDB API is returns demonym only ಠ_ಠ
-  console.log(recipe[0].strArea);
+  console.log(recipe[0]);
   const country_code = getCountry(recipe[0].strArea);
   const flag_image_src = `https://www.countryflags.io/${country_code}/shiny/64.png`;
   console.log(recipe[0].strArea + ":" + country_code);
