@@ -47,7 +47,12 @@ const getAllRecipes = async (allCategoryIDs) => {
 
 const getCountry = (demonym) => {
   const country = countries.filter((c) => c.demonyms.eng.m === demonym);
-  return country[0].cca2;
+
+  if (country !== null) {
+    return country[0].cca2;
+  } else {
+    return "EU";
+  }
 };
 
 export default function Recipe({ recipe }) {
