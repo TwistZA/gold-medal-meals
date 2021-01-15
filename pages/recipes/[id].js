@@ -1,6 +1,6 @@
 import Layout from "../../src/components/Layout/Layout";
 import styles from "./Recipes.module.css";
-import { useRouter } from "next/router";
+import { countries } from "../../lib/Countries";
 
 export const getRecipe = async (id) => {
   const res = await fetch(
@@ -45,20 +45,60 @@ const getAllRecipes = async (allCategoryIDs) => {
   return recipesAppended.flat();
 };
 
+const getCountry = (demonym) => {
+  const country = countries.filter((c) => c.demonyms.eng.m === demonym);
+  return country[0].cca2;
+};
+
 export default function Recipe({ recipe }) {
+  //get country by demonym, sonce mealDB API is returns demonym only ಠ_ಠ
+  const country_code = getCountry(recipe[0].strArea);
+  const flag_image_src = `https://www.countryflags.io/${country_code}/shiny/64.png`;
+  console.log(country_code);
+
   return (
     <Layout>
       <div className={styles.recipe_list_container}>
         <div className={styles.card}>
-          <img src={recipe[0].strMealThumb} alt={recipe[0].strMeal}></img>
-          <div className={styles.recipe_button}>
-            <a href="#">
-              <h3>{recipe[0].strMeal}</h3>
-              <button className={styles.recipe_button_inner}>Recipe</button>
-              <p>{recipe[0].strInstructions}</p>
-            </a>
+          <img
+            className={styles.mealThumb}
+            src={recipe[0].strMealThumb}
+            alt={recipe[0].strMeal}
+          ></img>
+          <h1>{recipe[0].strMeal}</h1>
+
+          <div className={styles.recipeSubHeadingContainer}>
+            <div className={styles.recipeSubHeadingCategory}>
+              <h4 className={styles.Title}>Category:</h4>
+              <h4>{recipe[0].strCategory}</h4>
+            </div>
+            <img src={flag_image_src} alt={recipe[0].strArea}></img>
+
+            <div className={styles.recipeSubHeadingCountry}>
+              <h4 className={styles.Title}>Country:</h4>
+              <h4>{recipe[0].strArea}</h4>
+            </div>
           </div>
         </div>
+        <div className={styles.recipeCard}>
+          <h2>Ingredients</h2>
+        </div>
+        <div className={styles.recipeCard}>
+          <h2>Method</h2>
+
+          <p>{recipe[0].strInstructions}</p>
+        </div>
+        {recipe[0].strYoutube ? (
+          <div className={styles.card}>
+            <iframe
+              width="320"
+              height="200"
+              src={recipe[0].strYoutube}
+            ></iframe>
+          </div>
+        ) : (
+          <div className={styles.card}></div>
+        )}
       </div>
     </Layout>
   );
@@ -73,14 +113,14 @@ export const getStaticPaths = async () => {
   const filteredCategories = allCategories.categories.map(
     (item) => item.strCategory
   );
-  // console.log(filteredCategories);
+
+  // HACK DELETE!!!!!!!!!!!!!!!
+  //const filteredCategories = ["Goat"];
+  //////////////////////////////
+
+  //console.log(filteredCategories);
 
   const allRecipes = await getAllRecipes(filteredCategories);
-
-  console.log(allRecipes);
-  allRecipes.map((id) => {
-    console.log(id);
-  });
 
   const paths = allRecipes.map((id) => ({
     params: {
