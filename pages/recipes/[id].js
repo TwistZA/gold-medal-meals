@@ -62,12 +62,12 @@ export default function Recipe({ recipe }) {
   let country_code = "EU";
   console.log(recipe[0].idMeal);
   const area = recipe[0].strArea.toUpperCase();
-  if (area === "AMERICAN") {
-    country_code = "US";
+  if (area === "UNKNOWN") {
+    country_code = "EU";
   } else if (area === "FRENCH") {
     country_code = "FR";
-  } else if (area === "UNKOWN") {
-    country_code = "EU";
+  } else if (area === "AMERICAN") {
+    country_code = "US";
   } else {
     country_code = getCountry(recipe[0].strArea);
   }
