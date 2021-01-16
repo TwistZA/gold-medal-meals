@@ -19,6 +19,10 @@
  
 }
 
+.card:hover{
+    cursor: pointer;
+}
+
 .card img {
     width:100%;
     
@@ -47,6 +51,11 @@
     border-radius: 5px;
     font-weight: 700;
 }
+
+.recipe_button_inner:hover{
+    cursor: pointer;
+}
+
 
 
 

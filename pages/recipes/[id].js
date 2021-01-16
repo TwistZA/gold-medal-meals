@@ -56,12 +56,22 @@ const getCountry = (demonym) => {
 };
 
 export default function Recipe({ recipe }) {
-  //get country by demonym, sonce mealDB API is returns demonym only ಠ_ಠ
+  //get country by demonym, since mealDB API is returns demonym only ಠ_ಠ
+  //Also doing some error checking for robustness since the API returns unknown for some fields
+
   let country_code = "EU";
   console.log(recipe[0].idMeal);
-  if (recipe[0].strArea.toUpperCase() !== "UNKNOWN") {
+  const area = recipe[0].strArea.toUpperCase();
+  if (area === "AMERICAN") {
+    country_code = "US";
+  } else if (area === "FRENCH") {
+    country_code = "FR";
+  } else if (area === "UNKOWN") {
+    country_code = "EU";
+  } else {
     country_code = getCountry(recipe[0].strArea);
   }
+
   const flag_image_src = `https://www.countryflags.io/${country_code}/shiny/64.png`;
 
   console.log(recipe[0].strArea + ":" + country_code);
@@ -79,36 +89,108 @@ export default function Recipe({ recipe }) {
 
           <div className={styles.recipeSubHeadingContainer}>
             <div className={styles.recipeSubHeadingCategory}>
-              <h4 className={styles.Title}>Category:</h4>
+              <h4 className={styles.Title}>Category: </h4>
               <h4>{recipe[0].strCategory}</h4>
             </div>
             <img src={flag_image_src} alt={recipe[0].strArea}></img>
 
             <div className={styles.recipeSubHeadingCountry}>
-              <h4 className={styles.Title}>Country:</h4>
+              <h4 className={styles.Title}>Country: </h4>
               <h4>{recipe[0].strArea}</h4>
             </div>
           </div>
         </div>
         <div className={styles.recipeCard}>
           <h2>Ingredients</h2>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient1}</div>
+            <div>{recipe[0].strMeasure1}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient2}</div>
+            <div>{recipe[0].strMeasure2}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient3}</div>
+            <div>{recipe[0].strMeasure3}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient4}</div>
+            <div>{recipe[0].strMeasure4}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient5}</div>
+            <div>{recipe[0].strMeasure5}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient6}</div>
+            <div>{recipe[0].strMeasure6}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient7}</div>
+            <div>{recipe[0].strMeasure7}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient8}</div>
+            <div>{recipe[0].strMeasure8}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient9}</div>
+            <div>{recipe[0].strMeasure9}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient10}</div>
+            <div>{recipe[0].strMeasure10}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient11}</div>
+            <div>{recipe[0].strMeasure11}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient12}</div>
+            <div>{recipe[0].strMeasure12}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient13}</div>
+            <div>{recipe[0].strMeasure13}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient14}</div>
+            <div>{recipe[0].strMeasure14}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient15}</div>
+            <div>{recipe[0].strMeasure15}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient16}</div>
+            <div>{recipe[0].strMeasure16}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient17}</div>
+            <div>{recipe[0].strMeasure17}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient18}</div>
+            <div>{recipe[0].strMeasure18}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient19}</div>
+            <div>{recipe[0].strMeasure19}</div>
+          </div>
+          <div className={styles.ingredientsContainer}>
+            <div>{recipe[0].strIngredient20}</div>
+            <div>{recipe[0].strMeasure20}</div>
+          </div>
         </div>
         <div className={styles.recipeCard}>
           <h2>Method</h2>
 
           <p>{recipe[0].strInstructions}</p>
         </div>
-        {recipe[0].strYoutube ? (
-          <div className={styles.card}>
-            <iframe
-              width="320"
-              height="200"
-              src={recipe[0].strYoutube}
-            ></iframe>
-          </div>
-        ) : (
-          <div className={styles.card}></div>
-        )}
+        <div className={styles.card}>
+          <h2>More {recipe[0].strArea} recipes</h2>
+        </div>
       </div>
     </Layout>
   );
@@ -119,13 +201,14 @@ export const getStaticPaths = async () => {
   // get recipelist
   //loop through for every recipelist item
   console.log("===================================");
+
   const allCategories = await getAllCategories();
   const filteredCategories = allCategories.categories.map(
     (item) => item.strCategory
   );
 
   // HACK DELETE!!!!!!!!!!!!!!!
-  //const filteredCategories = ["Goat"];
+  // const filteredCategories = ["Goat"];
   //////////////////////////////
 
   //console.log(filteredCategories);
