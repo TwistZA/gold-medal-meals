@@ -98,8 +98,10 @@ export default function Recipe({ recipe }) {
   ];
 
   const imageSources = ingredientImageList.map((item) => {
-    if (item.length !== 0) {
-      return `https://www.themealdb.com/images/ingredients/${item}.png`;
+    if (item !== null) {
+      if (item.length !== 0) {
+        return `https://www.themealdb.com/images/ingredients/${item}.png`;
+      }
     }
   });
 
