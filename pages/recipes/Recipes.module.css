@@ -2,10 +2,11 @@
 
 .recipe_list_container{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(322px, 1fr));
     grid-gap: 2px;
     background: black;
     justify-content: center;
+    margin:1px;
     /* border-radius: 0.5rem; */
 }
 
@@ -29,7 +30,7 @@
     white-space:pre-line;
 }
 
-.card > img {
+.mealThumb {
     width:100%;
     padding:none;
     
@@ -57,12 +58,27 @@
     opacity: 0.5 ;
 }
 
+.flag{
+    width:30%;
+}
+
 .ingredientsContainer{
     display:flex;
     width:100%;
     justify-content: space-between;
+    margin-top: 2px;
+
 }
 
+.ingredientsImages{
+    display:flex;
+    width:100%;
+    flex-wrap: wrap;
+}
 
+.ingredientsImages > img {
+    width:25%;
+    padding:none;
+}
 
 

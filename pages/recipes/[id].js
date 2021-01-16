@@ -74,6 +74,35 @@ export default function Recipe({ recipe }) {
 
   const flag_image_src = `https://www.countryflags.io/${country_code}/shiny/64.png`;
 
+  const ingredientImageList = [
+    recipe[0].strIngredient1,
+    recipe[0].strIngredient2,
+    recipe[0].strIngredient3,
+    recipe[0].strIngredient4,
+    recipe[0].strIngredient5,
+    recipe[0].strIngredient6,
+    recipe[0].strIngredient7,
+    recipe[0].strIngredient8,
+    recipe[0].strIngredient9,
+    recipe[0].strIngredient10,
+    recipe[0].strIngredient11,
+    recipe[0].strIngredient12,
+    recipe[0].strIngredient13,
+    recipe[0].strIngredient14,
+    recipe[0].strIngredient15,
+    recipe[0].strIngredient16,
+    recipe[0].strIngredient17,
+    recipe[0].strIngredient18,
+    recipe[0].strIngredient19,
+    recipe[0].strIngredient20,
+  ];
+
+  const imageSources = ingredientImageList.map((item) => {
+    if (item.length !== 0) {
+      return `https://www.themealdb.com/images/ingredients/${item}.png`;
+    }
+  });
+
   console.log(recipe[0].strArea + ":" + country_code);
 
   return (
@@ -87,15 +116,18 @@ export default function Recipe({ recipe }) {
           ></img>
           <h1>{recipe[0].strMeal}</h1>
 
+          <img
+            className={styles.flag}
+            src={flag_image_src}
+            alt={recipe[0].strArea}
+          ></img>
           <div className={styles.recipeSubHeadingContainer}>
             <div className={styles.recipeSubHeadingCategory}>
-              <h4 className={styles.Title}>Category: </h4>
+              <h4 className={styles.Title}>Category:</h4>
               <h4>{recipe[0].strCategory}</h4>
             </div>
-            <img src={flag_image_src} alt={recipe[0].strArea}></img>
-
             <div className={styles.recipeSubHeadingCountry}>
-              <h4 className={styles.Title}>Country: </h4>
+              <h4 className={styles.Title}>Country:</h4>
               <h4>{recipe[0].strArea}</h4>
             </div>
           </div>
@@ -181,6 +213,16 @@ export default function Recipe({ recipe }) {
           <div className={styles.ingredientsContainer}>
             <div>{recipe[0].strIngredient20}</div>
             <div>{recipe[0].strMeasure20}</div>
+          </div>
+
+          <div className={styles.ingredientsImages}>
+            {imageSources.map((src) =>
+              src ? (
+                <img src={src} alt={recipe[0].strMeal} key={src}></img>
+              ) : (
+                <></>
+              )
+            )}
           </div>
         </div>
         <div className={styles.recipeCard}>
