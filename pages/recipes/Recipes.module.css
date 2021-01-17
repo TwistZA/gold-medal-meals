@@ -82,3 +82,49 @@
 }
 
 
+.MoreRecipesContainer{
+    display:flex;
+    width:100%;
+    flex-wrap: wrap;
+    /* border:solid blue 3px; */
+    justify-content: center;
+    
+}
+
+.miniCard{
+    width:30%;
+    /* border:solid red 1px; */
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction:column;
+    align-items: center;
+    background: black;
+    background: radial-gradient(circle, rgba(233,209,214,1) 0%, rgba(230,227,135,1) 52%, rgba(201,149,24,1) 100%); 
+    margin: 2px;
+    -webkit-box-shadow: 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0,0,0,0); 
+    box-shadow: 2px 5px 16px 0px #0B325E, 5px 5px 15px 5px rgba(0,0,0,0);
+}
+
+.miniCard:hover{
+    cursor: pointer;
+}
+
+.MoreRecipesImages{
+    width:100%;
+}
+
+.miniCardHeader{
+    width:98%;
+    /* border:1px solid purple; */
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+
+
+
+

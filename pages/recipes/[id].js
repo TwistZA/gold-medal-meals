@@ -1,6 +1,7 @@
 import Layout from "../../src/components/Layout/Layout";
 import styles from "./Recipes.module.css";
 import { countries } from "../../lib/Countries";
+import axios from "axios";
 
 export const getRecipe = async (id) => {
   const res = await fetch(
@@ -10,10 +11,6 @@ export const getRecipe = async (id) => {
   const recipe_list = await res.json();
 
   return recipe_list.meals;
-};
-
-export const getCategory = () => {
-  return "Beef";
 };
 
 export const getAllCategories = async () => {
@@ -55,7 +52,17 @@ const getCountry = (demonym) => {
   }
 };
 
-export default function Recipe({ recipe }) {
+export const getMoreRecipesFromThisCountry = async (country) => {
+  const res = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/filter.php?a=${country}`
+  );
+
+  const moreRecipes = await res.json();
+
+  return moreRecipes;
+};
+
+export default function Recipe({ recipe, moreRecipes }) {
   //get country by demonym, since mealDB API is returns demonym only ಠ_ಠ
   //Also doing some error checking for robustness since the API returns unknown for some fields
 
@@ -129,7 +136,7 @@ export default function Recipe({ recipe }) {
               <h4>{recipe[0].strCategory}</h4>
             </div>
             <div className={styles.recipeSubHeadingCountry}>
-              <h4 className={styles.Title}>Country:</h4>
+              <h4 className={styles.Title}>Origin:</h4>
               <h4>{recipe[0].strArea}</h4>
             </div>
           </div>
@@ -234,6 +241,21 @@ export default function Recipe({ recipe }) {
         </div>
         <div className={styles.card}>
           <h2>More {recipe[0].strArea} recipes</h2>
+          <div className={styles.MoreRecipesContainer}>
+            {moreRecipes.meals.map((rec) => (
+              <div className={styles.miniCard} key={rec.idMeal}>
+                <img
+                  className={styles.MoreRecipesImages}
+                  src={rec.strMealThumb}
+                  alt={rec.strMealThumb}
+                  key={rec.idMeal}
+                ></img>
+                <a href={`/recipes/${rec.idMeal}`}>
+                  <h4 className={styles.miniCardHeader}>{rec.strMeal}</h4>
+                </a>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </Layout>
@@ -272,10 +294,14 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
   const recipe = await getRecipe(params.id);
+  const moreRecipes = await getMoreRecipesFromThisCountry(recipe[0].strArea);
+
+  // console.log(moreRecipes);
 
   return {
     props: {
       recipe,
+      moreRecipes,
     },
   };
 };
