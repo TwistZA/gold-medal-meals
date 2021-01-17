@@ -32,3 +32,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+=====================
+🍽🍽 Todo List:  🍽🍽
+=====================
+1. Add navigation buttons (back to top, back to category)
+2. Update pages header with titles
+3. Center align the heading for meal on recipe page
+4. Refactoring
+5. Update footer with technologies
+6. Reduce the size of imported country js file
+

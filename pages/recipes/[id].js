@@ -123,7 +123,6 @@ export default function Recipe({ recipe, moreRecipes }) {
             alt={recipe[0].strMeal}
           ></img>
           <h1>{recipe[0].strMeal}</h1>
-
           <img
             className={styles.flag}
             src={flag_image_src}
