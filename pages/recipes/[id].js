@@ -1,7 +1,6 @@
 import Layout from "../../src/components/Layout/Layout";
 import styles from "./Recipes.module.css";
 import { countries } from "../../lib/Countries";
-import axios from "axios";
 
 export const getRecipe = async (id) => {
   const res = await fetch(
