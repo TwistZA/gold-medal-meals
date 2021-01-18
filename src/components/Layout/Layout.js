@@ -35,7 +35,7 @@ const Layout = ({ children, title = "🍽 Gold Medal Meals 🍽" }) => {
       <br></br>
       <ColoredLine color="yellow" />
       <footer className={styles.footer}>
-        Powered by React <i class="uil uil-react"></i>, Next JS, Vercel
+        Powered by React <i className="uil uil-react"></i>, Next JS, Vercel
       </footer>
     </div>
   );

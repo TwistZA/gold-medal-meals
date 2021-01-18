@@ -25,19 +25,14 @@ export const getAllCategories = async () => {
 const getAllRecipes = async (allCategoryIDs) => {
   const recipesAppended = [];
   for (var id in allCategoryIDs) {
-    // console.log(allCategoryIDs[id]);
     const res = await fetch(
       `https://www.themealdb.com/api/json/v1/1/filter.php?c=${allCategoryIDs[id]}`
     );
 
     const recipe_list = await res.json();
-    // console.log(recipe_list.meals);
-
     const newRecipesIDs = recipe_list.meals.map((item) => item.idMeal);
     recipesAppended.push(newRecipesIDs);
-    // console.log(recipesAppended);
   }
-  // const allRecipeIDs = recipe_list.meals.map((item) => item.idMeal);
   return recipesAppended.flat();
 };
 
@@ -66,7 +61,6 @@ export default function Recipe({ recipe, moreRecipes }) {
   //Also doing some error checking for robustness since the API returns unknown for some fields
 
   let country_code = "EU";
-  console.log(recipe[0].idMeal);
   const area = recipe[0].strArea.toUpperCase();
   if (area === "UNKNOWN") {
     country_code = "EU";
@@ -110,8 +104,6 @@ export default function Recipe({ recipe, moreRecipes }) {
       }
     }
   });
-
-  console.log(recipe[0].strArea + ":" + country_code);
 
   return (
     <Layout>
@@ -265,23 +257,13 @@ export const getStaticPaths = async () => {
   // get recipelist
   //loop through for every recipelist item
   console.log("===================================");
-  console.log("getStaticPaths: getAllCategories--->");
 
   const allCategories = await getAllCategories();
-  console.log("done--->");
   const filteredCategories = allCategories.categories.map(
     (item) => item.strCategory
   );
 
-  // HACK DELETE!!!!!!!!!!!!!!!
-  // const filteredCategories = ["Goat"];
-  //////////////////////////////
-
-  //console.log(filteredCategories);
-
-  console.log("getStaticPaths: getAllRecipes--->");
   const allRecipes = await getAllRecipes(filteredCategories);
-  console.log("done--->");
 
   const paths = allRecipes.map((id) => ({
     params: {
@@ -295,15 +277,11 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
-  console.log("getStaticProps: getRecipe--->");
   const recipe = await getRecipe(params.id);
-  console.log("getStaticProps: done--->");
-  console.log("getStaticProps: getMoreRecipesFromThisCountry--->");
   const allRecipesFromThisCountry = await getMoreRecipesFromThisCountry(
     recipe[0].strArea
   );
 
-  console.log("getStaticProps: done--->");
   const moreRecipes = allRecipesFromThisCountry.meals.filter(
     (recipe) => recipe.idMeal !== params.id
   );
