@@ -240,7 +240,7 @@ export default function Recipe({ recipe, moreRecipes }) {
         <div className={styles.card}>
           <h2>More {recipe[0].strArea} recipes</h2>
           <div className={styles.MoreRecipesContainer}>
-            {moreRecipes.meals.map((rec) => (
+            {moreRecipes.map((rec) => (
               <div className={styles.miniCard} key={rec.idMeal}>
                 <img
                   className={styles.MoreRecipesImages}
@@ -265,8 +265,10 @@ export const getStaticPaths = async () => {
   // get recipelist
   //loop through for every recipelist item
   console.log("===================================");
+  console.log("getStaticPaths: getAllCategories--->");
 
   const allCategories = await getAllCategories();
+  console.log("done--->");
   const filteredCategories = allCategories.categories.map(
     (item) => item.strCategory
   );
@@ -277,7 +279,9 @@ export const getStaticPaths = async () => {
 
   //console.log(filteredCategories);
 
+  console.log("getStaticPaths: getAllRecipes--->");
   const allRecipes = await getAllRecipes(filteredCategories);
+  console.log("done--->");
 
   const paths = allRecipes.map((id) => ({
     params: {
@@ -291,10 +295,18 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }) => {
+  console.log("getStaticProps: getRecipe--->");
   const recipe = await getRecipe(params.id);
-  const moreRecipes = await getMoreRecipesFromThisCountry(recipe[0].strArea);
+  console.log("getStaticProps: done--->");
+  console.log("getStaticProps: getMoreRecipesFromThisCountry--->");
+  const allRecipesFromThisCountry = await getMoreRecipesFromThisCountry(
+    recipe[0].strArea
+  );
 
-  // console.log(moreRecipes);
+  console.log("getStaticProps: done--->");
+  const moreRecipes = allRecipesFromThisCountry.meals.filter(
+    (recipe) => recipe.idMeal !== params.id
+  );
 
   return {
     props: {

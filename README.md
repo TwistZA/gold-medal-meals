@@ -41,5 +41,5 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 3. Center align the heading for meal on recipe page
 4. Refactoring
 5. Update footer with technologies
-6. Reduce the size of imported country js file
+
 
