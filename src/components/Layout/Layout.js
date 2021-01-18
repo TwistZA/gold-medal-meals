@@ -18,6 +18,10 @@ const Layout = ({ children, title = "🍽 Gold Medal Meals 🍽" }) => {
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="stylesheet"
+          href="https://unicons.iconscout.com/release/v2.1.5/css/unicons.css"
+        ></link>
       </Head>
 
       <header className={styles.header}>
@@ -27,11 +31,12 @@ const Layout = ({ children, title = "🍽 Gold Medal Meals 🍽" }) => {
       </header>
       <ColoredLine color="yellow" />
       <br></br>
-      <br></br>
       <main className={styles.main}>{children}</main>
       <br></br>
       <ColoredLine color="yellow" />
-      <footer className={styles.footer}>Powered by React, Next JS</footer>
+      <footer className={styles.footer}>
+        Powered by React <i class="uil uil-react"></i>, Next JS, Vercel
+      </footer>
     </div>
   );
 };
