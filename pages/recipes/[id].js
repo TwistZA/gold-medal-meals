@@ -108,7 +108,7 @@ export default function Recipe({ recipe, moreRecipes }) {
   return (
     <Layout>
       <div className={styles.recipe_list_container}>
-        <div className={styles.card}>
+        <div className={styles.card} key={recipe[0].strMeal}>
           <img
             className={styles.mealThumb}
             src={recipe[0].strMealThumb}
