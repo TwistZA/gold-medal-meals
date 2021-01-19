@@ -215,9 +215,14 @@ export default function Recipe({ recipe, moreRecipes }) {
           </div>
 
           <div className={styles.ingredientsImages}>
-            {imageSources.map((src) =>
+            {imageSources.map((src, index) =>
               src ? (
-                <img src={src} alt={recipe[0].strMeal} key={src}></img>
+                <img
+                  src={src}
+                  alt={recipe[0].strMeal}
+                  key={src}
+                  title={ingredientImageList[index]}
+                ></img>
               ) : (
                 <></>
               )

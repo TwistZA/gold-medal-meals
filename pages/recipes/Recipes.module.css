@@ -86,7 +86,6 @@
     display:flex;
     width:100%;
     flex-wrap: wrap;
-    /* border:solid blue 3px; */
     justify-content: center;
     
 }
@@ -115,7 +114,6 @@
 
 .miniCardHeader{
     width:98%;
-    /* border:1px solid purple; */
     display:flex;
     flex-direction: row;
     justify-content: center;
